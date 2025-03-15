@@ -2,6 +2,7 @@ const Application = function () {
   this.initA4();
   this.tuner = new Tuner(this.a4);
   this.notes = new Notes(".notes", this.tuner);
+  this.notes.initFrequencyControls();
   this.meter = new Meter(".meter");
   this.frequencyBars = new FrequencyBars(".frequency-bars");
   this.update({
@@ -11,6 +12,7 @@ const Application = function () {
     value: 69,
     cents: 0,
   });
+
 };
 
 Application.prototype.initA4 = function () {
@@ -52,6 +54,7 @@ Application.prototype.initA4 = function () {
         cents: 0,
       });
       localStorage.setItem("a4", newFreq);
+      
     });
   }
   
@@ -140,6 +143,7 @@ Application.prototype.updateFrequencyBars = function () {
 Application.prototype.update = function (note) {
   this.notes.update(note);
   this.meter.update((note.cents / 50) * 45);
+  
 };
 
 const app = new Application();

@@ -10,7 +10,38 @@ const Notes = function (selector, tuner) {
   this.$notesList.addEventListener("touchstart", (event) =>
     event.stopPropagation()
   );
+  
 };
+
+Notes.prototype.initFrequencyControls = function () {
+  const self = this;
+  const frequencySelect = document.getElementById("frequency-select");
+
+  // Event listener for frequency change
+  frequencySelect.addEventListener("change", function () {
+    // Stop the oscillator when the frequency is changed
+    self.tuner.stopOscillator();
+
+    // Clear the active note by removing the "active" class
+    const activeNote = self.$notesList.querySelector(".active");
+    if (activeNote) {
+      activeNote.classList.remove("active");
+    }
+
+    // Update the reference frequency on the tuner
+    const newFrequency = parseFloat(this.value);
+    self.tuner.middleA = newFrequency;
+    
+    // Optionally, update the displayed reference frequency
+    const frequencySpan = document.querySelector(".a4 span");
+    if (frequencySpan) {
+      frequencySpan.textContent = newFrequency;
+    }
+
+    // Optionally, you can update the visual elements of the meter or other UI components if needed
+  });
+};
+
 
 Notes.prototype.createNotes = function () {
   this.$notesList.innerHTML = "";
@@ -57,7 +88,54 @@ Notes.prototype.createNotes = function () {
       }
     });
   });
+
+  this.enableDragScroll();
 };
+
+// Add drag functionality to make the notes list scrollable
+Notes.prototype.enableDragScroll = function () {
+  let isDragging = false;
+  let startX;
+  let scrollLeft;
+
+  const onMouseDown = (e) => {
+    isDragging = true;
+    startX = e.pageX || e.touches[0].pageX; // for mouse or touch
+    scrollLeft = this.$notesList.scrollLeft;
+    this.$notesList.style.cursor = 'grabbing';
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX || e.touches[0].pageX;
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    this.$notesList.scrollLeft = scrollLeft - walk;
+  };
+
+  const onMouseUp = () => {
+    isDragging = false;
+    this.$notesList.style.cursor = 'grab';
+  };
+
+  const onMouseLeave = () => {
+    isDragging = false;
+    this.$notesList.style.cursor = 'grab';
+  };
+
+  // Add event listeners for mouse
+  this.$notesList.addEventListener("mousedown", onMouseDown);
+  this.$notesList.addEventListener("mousemove", onMouseMove);
+  this.$notesList.addEventListener("mouseup", onMouseUp);
+  this.$notesList.addEventListener("mouseleave", onMouseLeave);
+
+  // Add touch events for mobile support
+  this.$notesList.addEventListener("touchstart", onMouseDown);
+  this.$notesList.addEventListener("touchmove", onMouseMove);
+  this.$notesList.addEventListener("touchend", onMouseUp);
+  this.$notesList.addEventListener("touchcancel", onMouseUp);
+};
+
 
 Notes.prototype.active = function ($note) {
   this.clearActive();
