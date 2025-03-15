@@ -13,6 +13,8 @@ body {
   user-select: none;
 }
 
+
+
 .notes {
   margin: auto;
   width: 400px;
@@ -30,13 +32,20 @@ body {
   display: inline-block;
   padding-right: 30px;
   padding-left: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
 }
-
 .note.active {
   color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1); /* Add a subtle background change */
+  transform: scale(1.05); /* Slightly enlarge the note when active */
+}
+
+.note.active:hover {
+  transform: scale(1.1); /* Increase the effect slightly on hover */
 }
 
 .notes-list {
+  /* scroll-behavior: smooth; Adds smooth scroll transitions */
   overflow: auto;
   overflow: -moz-scrollbars-none;
   white-space: nowrap;
@@ -53,9 +62,9 @@ body {
   display: none;
 }
 
-.note {
+/* .note {
   -webkit-tap-highlight-color: transparent;
-}
+} */
 
 .note span {
   position: absolute;
@@ -202,3 +211,4 @@ body {
   display: flex;
   align-items: center;
 }
+
