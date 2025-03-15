@@ -12,6 +12,34 @@ const Notes = function (selector, tuner) {
   );
   
 };
+Notes.prototype.initA4TextControl = function () {
+  const self = this;
+  const a4Text = document.querySelector(".a4 span");
+
+  if (a4Text) {
+    // Add event listener for clicking on A4 text
+    a4Text.addEventListener("click", function () {
+      // Stop the oscillator when the A4 text is clicked
+      self.tuner.stopOscillator();
+
+      // Clear the active note
+      const activeNote = self.$notesList.querySelector(".active");
+      if (activeNote) {
+        activeNote.classList.remove("active");
+      }
+
+      // // Optionally reset or change the frequency (this example sets it to 440Hz)
+      // self.tuner.middleA = 440;
+
+      // // Update the reference frequency in the display
+      // a4Text.textContent = "440"; // Or dynamically set this if needed
+
+      // Optionally, you can also update the visual components of the meter or UI
+    });
+  }
+};
+
+
 
 Notes.prototype.initFrequencyControls = function () {
   const self = this;

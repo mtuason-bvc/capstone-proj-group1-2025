@@ -3,6 +3,7 @@ const Application = function () {
   this.tuner = new Tuner(this.a4);
   this.notes = new Notes(".notes", this.tuner);
   this.notes.initFrequencyControls();
+  this.notes.initA4TextControl(); 
   this.meter = new Meter(".meter");
   this.frequencyBars = new FrequencyBars(".frequency-bars");
   this.update({
