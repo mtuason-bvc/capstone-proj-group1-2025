@@ -1,10 +1,15 @@
 html {
   height: 100%;
 }
+@font-face {
+  font-family: Modeco; src: url('modeco-trial.otf'); 
+} 
+ 
 
 body {
   position: fixed;
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
+  font-family: Modeco;
   color: #2c3e50;
   margin: 0;
   width: 100%;
@@ -35,8 +40,10 @@ body {
   transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
 }
 .note.active {
-  color: #e74c3c;
-  background-color: rgba(231, 76, 60, 0.1); /* Add a subtle background change */
+  /* color: #e74c3c; */
+  color: #2196f3;
+  background-color: #2195f323;
+  ; /* Add a subtle background change */
   transform: scale(1.05); /* Slightly enlarge the note when active */
 }
 
@@ -45,21 +52,24 @@ body {
 }
 
 .notes-list {
-  /* scroll-behavior: smooth; Adds smooth scroll transitions */
-  overflow: auto;
-  overflow: -moz-scrollbars-none;
-  white-space: nowrap;
+  overflow-x: auto; /* Make horizontal scroll available */
+  white-space: nowrap; /* Prevent line breaks */
   -ms-overflow-style: none;
-  -webkit-mask-image: -webkit-linear-gradient(
-    left,
-    rgba(255, 255, 255, 0),
-    #fff,
-    rgba(255, 255, 255, 0)
-  );
+  -webkit-mask-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 100%; /* Ensure the notes list doesn't exceed the screen width */
 }
+
 
 .notes-list::-webkit-scrollbar {
   display: none;
+}
+
+.note {
+  font-size: 80px; /* Make note text smaller on small screens */
+  padding-left: 8px;
+  padding-right: 18px;
 }
 
 /* .note {
@@ -83,11 +93,13 @@ body {
 
 .frequency {
   font-size: 32px;
+  color:transparent;
 }
 
 .frequency span {
   font-size: 50%;
   margin-left: 0.25em;
+  color:transparent;
 }
 
 .meter {
@@ -95,9 +107,9 @@ body {
   left: 0;
   right: 0;
   bottom: 50%;
-  width: 400px;
-  height: 33%;
-  margin: 0 auto 5vh auto;
+  width: 100%;
+  height: 25%; /* Reduced height for small screens */
+  margin: 0 auto;
 }
 
 .meter-pointer {
@@ -133,28 +145,44 @@ body {
   right: 50%;
 }
 
+.meter-scale-red{
+  color: red;
+}
+
+.meter-scale-green{
+  color: #76FF03;
+  width: 2px;
+}
+
 .meter-scale-strong {
   width: 2px;
   border-top-width: 20px;
 }
+
 
 .frequency-bars {
   position: fixed;
   bottom: 0;
 }
 
-@media (max-width: 768px) {
-  .meter {
-    width: 100%;
-  }
-
-  .notes {
-    width: 100%;
-  }
+.meter-note {
+  position: absolute;
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: bold;
+  transform-origin: center;
 }
 
-.swal-button {
-  background: #2c3e50;
+.meter-note.sharp {
+  top: -20px;
+  left: 50%;
+  transform: rotate(45deg);
+}
+
+.meter-note.flat {
+  top: -20px;
+  left: 50%;
+  transform: rotate(-45deg);
 }
 
 .a4 {
@@ -164,7 +192,7 @@ body {
 }
 
 .a4 span {
-  color: #e74c3c;
+  color: #2196f3;
 }
 
 .auto {
@@ -203,8 +231,9 @@ body {
 
 #frequency-select:focus, #frequency-input:focus {
   outline: none;
-  border-color: #e74c3c;
-  box-shadow: 0 0 3px rgba(231, 76, 60, 0.3);
+  border-color:#2196f3;
+  box-shadow:  #2195f346;
+  ;
 }
 
 .a4 {
@@ -212,3 +241,25 @@ body {
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .meter {
+    width: 90%; /* Adjust the width to be smaller */
+    height: 25%; /* Adjust the height to be smaller */
+  }
+
+  .notes {
+    width: 100%;
+  }
+
+  
+  .auto {
+    position: fixed; /* Override the position property */
+    bottom: 16px;
+    left: 16px;
+    top: auto; /* Reset the top property */
+  }
+}
+
+.swal-button {
+  background: #2c3e50;
+}
