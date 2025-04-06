@@ -1,11 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music tuner</title>
-</head>
-<body>
-    <h1> Music tuner</h1>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,user-scalable=no"
+    />
+    <title>Online Tuner</title>
+    <link rel="stylesheet" href="./chromatic/style.css" />
+    <link rel="stylesheet" href="./chromatic/nav.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </head>
+  <body>
+    <canvas class="frequency-bars"></canvas>
+    <div class="meter">
+      <div class="meter-dot"></div>
+      <div class="meter-pointer"></div>
+    </div>
+    <div class="notes">
+      <div class="notes-list"></div>
+      <div class="frequency">
+        <span>Hz</span>
+      </div>
+      
+    </div>
+    <!-- <div class="a4">A<sub>4</sub> = <span>440</span> Hz</div> -->
+    <div class="a4">
+      A<sub>4</sub> = <span>440</span> Hz
+      <div class="frequency-controls">
+        <select id="frequency-select">
+          <option value="440" selected>440 Hz (Modern standard)</option>
+          <option value="392">392 Hz (Classical era)</option>
+          <option value="415">415 Hz (Baroque)</option>
+          <option value="432">432 Hz (Verdi tuning)</option>
+          <option value="435">435 Hz (Historical)</option>
+          <option value="438">438 Hz (Modern orchestra alternative)</option>
+          <option value="442">442 Hz (European)</option>
+          <option value="444">444 Hz (High tension)</option>
+          <option value="466">466 Hz (Renaissance)</option>
+        </select>
+      </div>
+    </div>
+    <label class="auto">
+      Listening
+      <input type="checkbox" checked />
+    </label>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aubiojs@0.1.1/build/aubio.min.js"></script>
+
+    <script src="./chromatic/tuner.js"></script>
+    <script src="./chromatic/meter.js"></script>
+    <script src="./chromatic/frequency-bars.js"></script>
+    <script src="./chromatic/notes.js"></script>
+    <script src="./chromatic/app.js"></script>
+    <div class="navbar">
+
+      <ul class="nav-links">
+        <li><a href="./index.html"><i class="fa-solid fa-gauge fa-2x"></i>Chromatic Tuner</a></li>
+        <li><a href="./drone.html"><i class="fa-solid fa-grip-lines fa-2x"></i>Drone</a></li>
+        <li><a href="./tanpura.html"><i class="fa-solid fa-layer-group fa-2x"></i>Tanpura</a></li>
+        <li><a href="./info.html"><img class="pic" src="./Triangle w color_Full color.svg" alt=""></i>Info</a></li>
+      </ul>
+    </div>
+  </body>
 </html>

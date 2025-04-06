@@ -108,7 +108,7 @@ body {
   right: 0;
   bottom: 50%;
   width: 100%;
-  height: 25%; /* Reduced height for small screens */
+  height: 35%; /* Reduced height for small screens */
   margin: 0 auto;
 }
 
@@ -209,6 +209,7 @@ body {
 }
 
 #frequency-select {
+  font-family: Modeco;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -241,20 +242,20 @@ body {
   align-items: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 650px) {
   .meter {
     width: 90%; /* Adjust the width to be smaller */
-    height: 25%; /* Adjust the height to be smaller */
+    height: 30%; /* Adjust the height to be smaller */
   }
 
-  .notes {
+  /* .notes {
     width: 100%;
-  }
+  } */
 
-  
   .auto {
+    text-align: left;
     position: fixed; /* Override the position property */
-    bottom: 16px;
+    bottom: 15%;
     left: 16px;
     top: auto; /* Reset the top property */
   }
@@ -263,3 +264,4 @@ body {
 .swal-button {
   background: #2c3e50;
 }
+

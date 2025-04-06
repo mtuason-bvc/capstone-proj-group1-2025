@@ -1,0 +1,239 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ececec;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive container */
+.container {
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    contain: content;
+    border: 3px black solid;
+    border-radius: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 793px;
+    height: auto;
+    margin: 30px auto;
+}
+
+.container h1 {
+    font-size: 1.8rem;
+    margin-top: 0;
+}
+
+.container p {
+    font-size: 1rem;
+}
+
+/* Toggle switch styling */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.toggle-container span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #607DB8;
+}
+
+/* Buttons for notes */
+.octave-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.note {
+    padding: 15px 20px;
+    border: 2px solid #2196F3;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: white;
+    color: #2196F3;
+    transition: 0.3s;
+    min-width: 100px;
+}
+
+.note.selected,
+.note:hover {
+    color: white;
+    background-color: #2196F3;
+}
+
+/* Toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Box section */
+.box-2 {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.box-2 h3 {
+    font-size: 1.2rem;
+    color: rgb(85, 85, 85);
+}
+
+.box-2 p {
+    font-size: 1rem;
+    color: rgb(85, 85, 85);
+}
+
+
+
+/* Ensure image_text buttons are in a single row */
+.image_text-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: nowrap;  /* Prevent wrapping */
+    overflow-x: auto;  /* Enable horizontal scrolling if needed */
+    padding-bottom: 10px;
+    white-space: nowrap;  /* Prevent text from wrapping */
+}
+
+/* Styling for individual buttons */
+.image_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: sans-serif;
+    position: relative;
+    min-width: 100px; /* Ensures equal spacing */
+}
+
+.image_text a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    white-space: nowrap; /* Prevents text from breaking into two lines */
+}
+
+.image_text a:hover {
+    color: #007bff;
+}
+
+.image_text button {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Image button */
+.pic {
+    height: 45px;
+}
+
+/* Make everything responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .container h1 {
+        font-size: 1.5rem;
+    }
+
+    .container p {
+        font-size: 0.9rem;
+    }
+
+    .note {
+        min-width: 80px;
+        font-size: 0.9rem;
+        padding: 12px 15px;
+    }
+
+    .box-2 {
+        text-align: center;
+    }
+
+    .box-2 h3 {
+        font-size: 1rem;
+    }
+
+    .box-2 p {
+        font-size: 0.9rem;
+    }
+    
+    .image_text-container {
+        justify-content: flex-start; /* Align left for better scrolling */
+        overflow-x: scroll; /* Allow horizontal scrolling */
+    }
+
+    .image_text {
+        min-width: 40px; /* Ensure uniform button size */
+    }
+
+    .image_text a {
+        gap: 2px;
+        font-size: 0.9rem;
+    }
+}
