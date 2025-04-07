@@ -7,11 +7,15 @@ const Notes = function (selector, tuner) {
   this.$notes = [];
   this.$notesMap = {};
   this.createNotes();
+  this.initNoteNavigation();
   this.$notesList.addEventListener("touchstart", (event) =>
     event.stopPropagation()
   );
   
 };
+
+
+
 Notes.prototype.initA4TextControl = function () {
   const self = this;
   const a4Text = document.querySelector(".a4 span");
@@ -120,6 +124,73 @@ Notes.prototype.createNotes = function () {
   this.enableDragScroll();
 };
 
+Notes.prototype.initNoteNavigation = function () {
+  const self = this;
+
+  // Select previous and next buttons
+  const prevButton = document.getElementById('previous-note');
+  const nextButton = document.getElementById('next-note');
+
+  // Initially update the button visibility based on isAutoMode
+  this.toggleNoteButtonsVisibility();
+
+  prevButton.addEventListener('click', function () {
+    self.selectPreviousNote();
+  });
+
+  nextButton.addEventListener('click', function () {
+    self.selectNextNote();
+  });
+};
+
+Notes.prototype.toggleNoteButtonsVisibility = function () {
+  const prevButton = document.getElementById('previous-note');
+  const nextButton = document.getElementById('next-note');
+
+  if (this.isAutoMode) {
+    prevButton.style.display = 'none';
+    nextButton.style.display = 'none';
+  } else {
+    prevButton.style.display = 'inline-block'; // or 'block' based on your layout
+    nextButton.style.display = 'inline-block';
+  }
+};
+
+
+
+Notes.prototype.selectPreviousNote = function () {
+  const activeNote = this.$notesList.querySelector(".active");
+  if (activeNote) {
+    const prevNote = activeNote.previousElementSibling;
+    if (prevNote) {
+      this.active(prevNote);
+      
+      // Play frequency of previous note only when isAutoMode is false
+      if (!this.isAutoMode) {
+        this.tuner.play(prevNote.dataset.frequency); // Play frequency of previous note
+      }
+    }
+  }
+};
+
+Notes.prototype.selectNextNote = function () {
+  const activeNote = this.$notesList.querySelector(".active");
+  if (activeNote) {
+    const nextNote = activeNote.nextElementSibling;
+    if (nextNote) {
+      this.active(nextNote);
+      
+      // Play frequency of next note only when isAutoMode is false
+      if (!this.isAutoMode) {
+        this.tuner.play(nextNote.dataset.frequency); // Play frequency of next note
+      }
+    }
+  }
+};
+
+
+
+
 // Add drag functionality to make the notes list scrollable
 Notes.prototype.enableDragScroll = function () {
   let isDragging = false;
@@ -188,10 +259,12 @@ Notes.prototype.update = function (note) {
   }
 };
 
+
 Notes.prototype.toggleAutoMode = function () {
   if (!this.isAutoMode) {
     this.tuner.stopOscillator();
   }
   this.clearActive();
   this.isAutoMode = !this.isAutoMode;
+  this.toggleNoteButtonsVisibility(); // Update button visibility when switching modes
 };

@@ -112,6 +112,35 @@ body {
   margin: 0 auto;
 }
 
+/* Remove previous styles for the buttons */
+#previous-note, #next-note {
+  position: absolute; /* Make the buttons absolute for positioning */
+  top: 50%; /* Center the buttons vertically */
+  transform: translateY(-50%); /* Align them exactly in the center vertically */
+  z-index: 10; /* Ensure the buttons are on top */
+  background-color: #2196f3; /* Button color */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Button padding */
+  font-size: 16px; /* Font size */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+/* Hover effect for the buttons */
+#previous-note:hover, #next-note:hover {
+  background-color: #1e88e5;
+}
+
+#previous-note {
+  left: calc(50% - 350px); /* Position to the left of the meter */
+}
+
+#next-note {
+  right: calc(50% - 350px); /* Position to the right of the meter */
+}
+
 .meter-pointer {
   width: 2px;
   height: 100%;
@@ -242,10 +271,22 @@ body {
   align-items: center;
 }
 
+
+
 @media (max-width: 650px) {
   .meter {
     width: 90%; /* Adjust the width to be smaller */
     height: 30%; /* Adjust the height to be smaller */
+  }
+
+  #previous-note {
+    top: 160px;
+    left: calc(50% - 150px); /* Position to the left of the meter */
+  }
+
+  #next-note {
+    top: 160px;
+    right: calc(50% - 150px); /* Position to the right of the meter */
   }
 
   /* .notes {
@@ -259,7 +300,10 @@ body {
     left: 16px;
     top: auto; /* Reset the top property */
   }
+
 }
+
+
 
 .swal-button {
   background: #2c3e50;
