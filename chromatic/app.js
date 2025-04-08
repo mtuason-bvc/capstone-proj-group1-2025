@@ -126,7 +126,8 @@ Application.prototype.start = function () {
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount);
   });
 
-
+  //uncomment this to enable the frequency bar historgram
+  // this.updateFrequencyBars();
   
   document.querySelector(".auto input").addEventListener("change", () => {
     this.notes.toggleAutoMode();

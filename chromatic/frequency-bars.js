@@ -1,5 +1,6 @@
 /**
- * the frequency histogram
+ * the frequency histogram. This is currently not being used right now but if you want to bring
+ * back the effect of the frequency histogram, you can uncomment the code in app.js calling this.updateFrequencyBars();
  *
  * @param {string} selector
  * @constructor

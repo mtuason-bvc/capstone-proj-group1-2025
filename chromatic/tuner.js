@@ -20,11 +20,14 @@ const Tuner = function (a4) {
   this.initGetUserMedia();
 };
 
+//As per documentation, navigator.mediaDevices.getUserMedia only works if the website it https:// or localhost
+//So, if you are testing locally, make sure to use localhost or a local server
 Tuner.prototype.initGetUserMedia = function () {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!window.AudioContext) {
     return alert("AudioContext not supported");
   }
+
 
   // Older browsers might not implement mediaDevices at all, so we set an empty object first
   if (navigator.mediaDevices === undefined) {

@@ -32,14 +32,7 @@ Notes.prototype.initA4TextControl = function () {
         activeNote.classList.remove("active");
       }
 
-      // // Optionally reset or change the frequency (this example sets it to 440Hz)
-      // self.tuner.middleA = 440;
-
-      // // Update the reference frequency in the display
-      // a4Text.textContent = "440"; // Or dynamically set this if needed
-
-      // Optionally, you can also update the visual components of the meter or UI
-    });
+      });
   }
 };
 
@@ -74,12 +67,16 @@ Notes.prototype.initFrequencyControls = function () {
   });
 };
 
-
+//This function is triggered whenever the reference frequency is changed
+//it updates the frequency of each note in real time depending on the selected reference frequency
 Notes.prototype.createNotes = function () {
   this.$notesList.innerHTML = "";
   const minOctave = 1;
   const maxOctave = 8;
+  // for loop for the 8 octaves
   for (var octave = minOctave; octave <= maxOctave; octave += 1) {
+    // for loop for the 12 notes in each octave
+    // this.tuner.noteStrings is an array of note names, e.g., ["C", "C#", "D", ...]
     for (var n = 0; n < 12; n += 1) {
       const $note = document.createElement("div");
       $note.className = "note";
@@ -124,6 +121,7 @@ Notes.prototype.createNotes = function () {
   this.enableDragScroll();
 };
 
+// Initialize note navigation buttons (previous and next) so that it knows which notes are next and previous to the current note
 Notes.prototype.initNoteNavigation = function () {
   const self = this;
 
@@ -157,11 +155,14 @@ Notes.prototype.toggleNoteButtonsVisibility = function () {
 };
 
 
-
+//can be used as a reference for selecting the previous octave by selecting the data-value attribute 
+// of the active note then doing a minus 12. Add a check to see if the note is already in the first octave
+//and if so, do nothing. This is a good way to select the previous octave
 Notes.prototype.selectPreviousNote = function () {
   const activeNote = this.$notesList.querySelector(".active");
   if (activeNote) {
     const prevNote = activeNote.previousElementSibling;
+    
     if (prevNote) {
       this.active(prevNote);
       
@@ -259,7 +260,8 @@ Notes.prototype.update = function (note) {
   }
 };
 
-
+//isAutoMode is the checkbox for "Listening"
+//false == is playback mode
 Notes.prototype.toggleAutoMode = function () {
   if (!this.isAutoMode) {
     this.tuner.stopOscillator();

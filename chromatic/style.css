@@ -8,8 +8,7 @@ html {
 
 body {
   position: fixed;
-  /* font-family: sans-serif; */
-  font-family: Modeco;
+  font-family: Modeco, sans-serif;
   color: #2c3e50;
   margin: 0;
   width: 100%;
@@ -17,8 +16,6 @@ body {
   cursor: default;
   user-select: none;
 }
-
-
 
 .notes {
   margin: auto;
@@ -72,10 +69,6 @@ body {
   padding-right: 18px;
 }
 
-/* .note {
-  -webkit-tap-highlight-color: transparent;
-} */
-
 .note span {
   position: absolute;
   right: 0.25em;
@@ -93,7 +86,8 @@ body {
 
 .frequency {
   font-size: 32px;
-  color:transparent;
+  color:transparent; 
+  /* Hide frequency text, set a color to make it visible for troubleshooting*/
 }
 
 .frequency span {
@@ -112,7 +106,6 @@ body {
   margin: 0 auto;
 }
 
-/* Remove previous styles for the buttons */
 #previous-note, #next-note {
   position: absolute; /* Make the buttons absolute for positioning */
   top: 50%; /* Center the buttons vertically */
@@ -238,7 +231,7 @@ body {
 }
 
 #frequency-select {
-  font-family: Modeco;
+  font-family: Modeco, sans-serif;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -272,7 +265,7 @@ body {
 }
 
 
-
+/* Responsive styles for smaller screens */
 @media (max-width: 650px) {
   .meter {
     width: 90%; /* Adjust the width to be smaller */
@@ -289,10 +282,6 @@ body {
     right: calc(50% - 150px); /* Position to the right of the meter */
   }
 
-  /* .notes {
-    width: 100%;
-  } */
-
   .auto {
     text-align: left;
     position: fixed; /* Override the position property */
@@ -302,8 +291,6 @@ body {
   }
 
 }
-
-
 
 .swal-button {
   background: #2c3e50;
