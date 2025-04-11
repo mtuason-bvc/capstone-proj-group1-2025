@@ -1,0 +1,298 @@
+html {
+  height: 100%;
+}
+@font-face {
+  font-family: Modeco; src: url('modeco-trial.otf'); 
+} 
+ 
+
+body {
+  position: fixed;
+  font-family: Modeco, sans-serif;
+  color: #2c3e50;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  user-select: none;
+}
+
+.notes {
+  margin: auto;
+  width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.note {
+  font-size: 90px;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  padding-right: 30px;
+  padding-left: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
+}
+.note.active {
+  /* color: #e74c3c; */
+  color: #2196f3;
+  background-color: #2195f323;
+  ; /* Add a subtle background change */
+  transform: scale(1.05); /* Slightly enlarge the note when active */
+}
+
+.note.active:hover {
+  transform: scale(1.1); /* Increase the effect slightly on hover */
+}
+
+.notes-list {
+  overflow-x: auto; /* Make horizontal scroll available */
+  white-space: nowrap; /* Prevent line breaks */
+  -ms-overflow-style: none;
+  -webkit-mask-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 100%; /* Ensure the notes list doesn't exceed the screen width */
+}
+
+
+.notes-list::-webkit-scrollbar {
+  display: none;
+}
+
+.note {
+  font-size: 80px; /* Make note text smaller on small screens */
+  padding-left: 8px;
+  padding-right: 18px;
+}
+
+.note span {
+  position: absolute;
+  right: 0.25em;
+  font-size: 40%;
+  font-weight: normal;
+}
+
+.note-sharp {
+  top: 0.3em;
+}
+
+.note-octave {
+  bottom: 0.3em;
+}
+
+.frequency {
+  font-size: 32px;
+  color:transparent; 
+  /* Hide frequency text, set a color to make it visible for troubleshooting*/
+}
+
+.frequency span {
+  font-size: 50%;
+  margin-left: 0.25em;
+  color:transparent;
+}
+
+.meter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  width: 100%;
+  height: 35%; /* Reduced height for small screens */
+  margin: 0 auto;
+}
+
+#previous-note, #next-note {
+  position: absolute; /* Make the buttons absolute for positioning */
+  top: 50%; /* Center the buttons vertically */
+  transform: translateY(-50%); /* Align them exactly in the center vertically */
+  z-index: 10; /* Ensure the buttons are on top */
+  background-color: #2196f3; /* Button color */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Button padding */
+  font-size: 16px; /* Font size */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+/* Hover effect for the buttons */
+#previous-note:hover, #next-note:hover {
+  background-color: #1e88e5;
+}
+
+#previous-note {
+  left: calc(50% - 350px); /* Position to the left of the meter */
+}
+
+#next-note {
+  right: calc(50% - 350px); /* Position to the right of the meter */
+}
+
+.meter-pointer {
+  width: 2px;
+  height: 100%;
+  background: #2c3e50;
+  transform: rotate(45deg);
+  transform-origin: bottom;
+  transition: transform 0.5s;
+  position: absolute;
+  right: 50%;
+}
+
+.meter-dot {
+  width: 10px;
+  height: 10px;
+  background: #2c3e50;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -5px;
+  right: 50%;
+  margin-right: -4px;
+}
+
+.meter-scale {
+  width: 1px;
+  height: 100%;
+  transform-origin: bottom;
+  transition: transform 0.2s;
+  box-sizing: border-box;
+  border-top: 10px solid;
+  position: absolute;
+  right: 50%;
+}
+
+.meter-scale-red{
+  color: red;
+}
+
+.meter-scale-green{
+  color: #76FF03;
+  width: 2px;
+}
+
+.meter-scale-strong {
+  width: 2px;
+  border-top-width: 20px;
+}
+
+
+.frequency-bars {
+  position: fixed;
+  bottom: 0;
+}
+
+.meter-note {
+  position: absolute;
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: bold;
+  transform-origin: center;
+}
+
+.meter-note.sharp {
+  top: -20px;
+  left: 50%;
+  transform: rotate(45deg);
+}
+
+.meter-note.flat {
+  top: -20px;
+  left: 50%;
+  transform: rotate(-45deg);
+}
+
+.a4 {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.a4 span {
+  color: #2196f3;
+}
+
+.auto {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.frequency-controls {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  gap: 5px;
+}
+
+#frequency-select {
+  font-family: Modeco, sans-serif;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#frequency-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+#frequency-select:hover, #frequency-input:hover {
+  border-color: #999;
+}
+
+#frequency-select:focus, #frequency-input:focus {
+  outline: none;
+  border-color:#2196f3;
+  box-shadow:  #2195f346;
+  ;
+}
+
+.a4 {
+  display: flex;
+  align-items: center;
+}
+
+
+/* Responsive styles for smaller screens */
+@media (max-width: 650px) {
+  .meter {
+    width: 90%; /* Adjust the width to be smaller */
+    height: 30%; /* Adjust the height to be smaller */
+  }
+
+  #previous-note {
+    top: 160px;
+    left: calc(50% - 150px); /* Position to the left of the meter */
+  }
+
+  #next-note {
+    top: 160px;
+    right: calc(50% - 150px); /* Position to the right of the meter */
+  }
+
+  .auto {
+    text-align: left;
+    position: fixed; /* Override the position property */
+    bottom: 15%;
+    left: 16px;
+    top: auto; /* Reset the top property */
+  }
+
+}
+
+.swal-button {
+  background: #2c3e50;
+}
+

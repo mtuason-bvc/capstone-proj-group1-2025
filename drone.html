@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Music Tuner - Drone Mode</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="drone.css">
+</head>
+<body>
+ 
+    <div class="container">
+        <div class="head-text">
+            <h1>ABC Music Tuner - Drone Mode</h1>
+            <p>Tap a note to play sound. Tap again to stop.</p>
+        </div>
+        
+        <!-- content here -->
+        <!-- toggle switch -->
+        <div class="toggle-container">
+            <span>Bb-Tuning</span>
+            <label class="switch">
+                <input type="checkbox" id="tuningToggle">
+                <span class="slider round"></span>
+            </label>
+            <span>A-Tuning</span>
+        </div >
+
+        <!-- buttons -->
+        <div class="octave-buttons structure">
+            <button class="note" data-note="bass">Bass <br> (8va 1-2)</button>
+            <button class="note" data-note="tenor">Tenor <br> (8va 2-3)</button><br>
+            <button class="note" data-note="alto">Alto <br> (8va 3-4)</button>
+            <button class="note" data-note="soprano">Soprano <br> (8va 4-5)</button>
+        </div>
+
+
+        <!-- about drone -->
+        <div class="about">
+        
+            <h3>About Drone (440)</h3>
+            <p>Everyone hears or matches a reference pitch with ease.</p>
+            <p>Use this tool to play a perfect 4th or fifth to test tuning. Listed for the sound to 'lock in' and you'll know how to adjust your tuning or if you are in-tune</p>
+            <p>For Bb-tuning, play Eb or F. For A-turning, play D or E.</p>
+        </div>
+
+         
+        <!-- navbar -->
+        <nav class="navbar">
+                
+            <div class="image_text">
+                        
+                <button class="nav-button"><a href="./index.html" target="_self"><i class="fa-solid fa-gauge fa-2x"></i>Chromatic</a></button> 
+            </div>
+                
+            <div class="image_text">
+                    
+                    <button class="nav-button"><a href="./drone.html" target="_self"><i class="fa-solid fa-grip-lines fa-2x"></i>Drone</a></button> 
+            </div>
+                
+            <div class="image_text">
+                    
+                    <button class="nav-button"><a href="./tanpura.html" target="_self"> <i class="fa-solid fa-layer-group fa-2x"></i>Tanpura</a></button>
+            </div>
+                
+            <div class="image_text">
+                    <button id="btn1" class="nav-button"><a href="./info.html" target="_self"> <img class="pic" src="Triangle w color_Full color.svg" alt=""> Info</a></button> 
+            </div>
+    </nav>
+        
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
