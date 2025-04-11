@@ -1,131 +1,109 @@
 document.addEventListener("DOMContentLoaded", () => {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    let isBbTuning = true; // Default to Bb-Tuning
+    let currentOsc1 = null;
+    let currentOsc2 = null;
+    let currentGain1 = null;
+    let currentGain2 = null;
+    let activeButton = null;
+    let isBbTuning = true;
 
-    // Frequency mappings for Bb-Tuning and A-Tuning
     const frequencies = {
         "Bb": { bass: 58.27, tenor: 116.54, alto: 233.08, soprano: 466.16 },
         "A": { bass: 55.00, tenor: 110.00, alto: 220.00, soprano: 440.00 }
     };
 
-    // Toggle tuning switch
     const tuningToggle = document.getElementById("tuningToggle");
     const tuningLabel = document.getElementById("tuningLabel");
 
     tuningToggle.addEventListener("change", () => {
-        isBbTuning = !tuningToggle.checked; // If checked, switch to A-Tuning
+        isBbTuning = !tuningToggle.checked;
         tuningLabel.textContent = isBbTuning ? "Bb-Tuning (466 Hz Ref)" : "A-Tuning (440 Hz Ref)";
         console.log(`Tuning switched to: ${isBbTuning ? "Bb" : "A"}`);
-        
-        // Play a brief sound in both tunings to compare
-        compareTuning();
+
+        if (activeButton) {
+            let note = activeButton.dataset.note;
+            updateHarmonicSound(note);
+        }
     });
 
-    function compareTuning() {
-        let BbFreq = frequencies["Bb"]["alto"]; // Pick an alto note for clarity
-        let AFreq = frequencies["A"]["alto"];
+    function updateHarmonicSound(note) {
+        if (!currentOsc1 || !currentOsc2 || !currentGain1 || !currentGain2) return;
 
-        playBriefTone(BbFreq, 0.1);
-        setTimeout(() => playBriefTone(AFreq, 0.1), 500); // Play A-tone after Bb-tone
+        const tuning = isBbTuning ? "Bb" : "A";
+        const baseFreq = frequencies[tuning][note];
+        if (!baseFreq) return;
+
+        currentOsc1.frequency.setValueAtTime(baseFreq, audioContext.currentTime);
+        currentOsc2.frequency.setValueAtTime(baseFreq * 2, audioContext.currentTime); // 1st harmonic
+
+        currentGain1.gain.setValueAtTime(8, audioContext.currentTime);
+        currentGain2.gain.setValueAtTime(4, audioContext.currentTime);
     }
 
-    function playBriefTone(frequency, duration) {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
+    function playHarmonic(note, button) {
+        if (currentOsc1) currentOsc1.stop();
+        if (currentOsc2) currentOsc2.stop();
 
-        oscillator.frequency.value = frequency;
-        gainNode.gain.value = 0.2; // Reduce volume
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        oscillator.start();
-        setTimeout(() => oscillator.stop(), duration * 1000);
-    }
-
-    // Play a sound using Web Audio API
-    let currentSources = [];
-    function playSound(note) {
-        if (currentSources.length) {
-            // Stop all active sounds
-            currentSources.forEach(source => source.stop());
-            currentSources = [];
-            return; // Stop playback on second tap
+        if (activeButton === button) {
+            button.classList.remove("active");
+            activeButton = null;
+            return;
         }
-    
+
         try {
-            let tuning = isBbTuning ? "Bb" : "A";
-            let frequency = frequencies[tuning][note];
-    
-            if (!frequency) {
-                console.error("Invalid note:", note);
-                return;
-            }
-    
-            
-            // Play first frequency immediately
-            let oscillator1 = audioContext.createOscillator();
-            let gainNode1 = audioContext.createGain();
-            oscillator1.frequency.value = frequency;
-            gainNode1.gain.value = 0.3;
+            const tuning = isBbTuning ? "Bb" : "A";
+            const baseFreq = frequencies[tuning][note];
+            if (!baseFreq) return;
 
-            oscillator1.connect(gainNode1);
-            gainNode1.connect(audioContext.destination);
+            const osc1 = audioContext.createOscillator();
+            const osc2 = audioContext.createOscillator();
+            const gain1 = audioContext.createGain();
+            const gain2 = audioContext.createGain();
 
-            oscillator1.start();
-            currentSources.push(oscillator1);
+            osc1.frequency.value = baseFreq;
+            osc2.frequency.value = baseFreq * 2;
 
-            // Play second frequency after 1 second
-            setTimeout(() => {
-                let oscillator2 = audioContext.createOscillator();
-                let gainNode2 = audioContext.createGain();
-                oscillator2.frequency.value = frequency * 2;
-                gainNode2.gain.value = 0.3;
+            gain1.gain.value = 8; // Fundamental louder
+            gain2.gain.value = 4; // Harmonic softer
 
-                oscillator2.connect(gainNode2);
-                gainNode2.connect(audioContext.destination);
+            osc1.connect(gain1).connect(audioContext.destination);
+            osc2.connect(gain2).connect(audioContext.destination);
 
-                oscillator2.start();
-                currentSources.push(oscillator2);
-            }, 0); // 1-second delay for the second sound
+            osc1.start();
+            osc2.start();
 
+            currentOsc1 = osc1;
+            currentOsc2 = osc2;
+            currentGain1 = gain1;
+            currentGain2 = gain2;
 
+            if (activeButton) activeButton.classList.remove("active");
+            activeButton = button;
+            button.classList.add("active");
 
-            // [frequency, frequency * 2].forEach(freq => {
-            //     const oscillator = audioContext.createOscillator();
-            //     const gainNode = audioContext.createGain();
+            console.log(`Playing ${note} with harmonic (${baseFreq}Hz + ${baseFreq * 2}Hz)`);
 
-            //     oscillator.frequency.value = freq;
-            //     gainNode.gain.value = 0.3;
-
-            //     oscillator.connect(gainNode);
-            //     gainNode.connect(audioContext.destination);
-
-            //     oscillator.start();
-
-            //     currentSources.push(oscillator);
-            // });
-            
         } catch (error) {
-            console.error("Error playing sound:", error);
+            console.error("Error:", error);
         }
     }
 
-    // Attach event listeners to buttons
-    
-    
     document.querySelectorAll(".note").forEach(button => {
         button.addEventListener("click", () => {
-            let note = button.dataset.note;
-            playSound(note, button);
+            const note = button.dataset.note;
+            playHarmonic(note, button);
+        });
+    });
+
+    // Nav button active link persistence
+    const links = document.querySelectorAll(".nav-button a");
+    const lastClicked = localStorage.getItem("activeLink");
+    links.forEach(link => {
+        if (link.getAttribute("href") === lastClicked) {
+            link.classList.add("active");
+        }
+        link.addEventListener("click", () => {
+            localStorage.setItem("activeLink", link.getAttribute("href"));
         });
     });
 });
-
-
-function toggleCollapse() {
-    const content = document.getElementById("tampuraContent");
-    content.style.visibility = content.style.visibility === "visible" ? "hidden" : "visible";
-}
-
-

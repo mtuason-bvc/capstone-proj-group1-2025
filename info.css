@@ -49,136 +49,8 @@ body {
 
 .head-text p{
      margin-top: 5px;
-     color: grey;
 }
 
-.toggle-container{
-    position: absolute;
-    top: 110px;
-}
-
-.toggle-container span{
-    margin-left: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #607DB8;
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 24px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 24px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-/* buttons */
-.structure{
-  position: absolute;
-  top: 150px;
-
-}
-
-.note {
-    padding: 20px 25px;
-    border: 2px  #2196F3 solid;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    background-color: white;
-    color:  #2196F3;
-    transition: background 0.3s, box-shadow 0.3s;
-    box-shadow: none;
-    margin-top: 10px;
-    margin-left: 10px;
-    
-}
-
-.note.active {
-    background: linear-gradient(45deg, #aeeeee, #ffb3e6, #ffffb3, #c3ffb3);
-    background-size: 300% 300%;
-    border-color: white;
-    animation: gradientMove 4s ease infinite;
-    box-shadow: 0px 0px 15px rgba(174, 238, 238, 0.8), 
-                0px 0px 15px rgba(255, 179, 230, 0.8);
-}
-
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* hover */
-.note:hover {
-    color: rgb(52, 8, 248);
-    background-color: #2196F3;
-}
-
-/* about drone */
-
-.about{
-  width: 370px;
-  height: 230px;
-  color: grey;
-  position: absolute;
-  left: 420px;
-  top: 90px;
-  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-
-}
-
-.about h3{
-  text-align: center;
-  color: #607DB8;
-}
-
-.about p{
-   padding: 0px;
-   margin: 0;
-   font-weight: lighter;
-   line-height: 1.5;
-   font-size: 15px;
-   text-align: center;
-   
-}
 
 
 
@@ -231,8 +103,6 @@ input:checked + .slider:before {
     color: #007bff; /* or any highlight color */
     
   }
-
-
   /* Mobile responsiveness */
 /* Mobile responsiveness */
 @media (max-width: 767px) {
@@ -393,4 +263,3 @@ input:checked + .slider:before {
         left: 5%; /* Adjusted for tablet */
     }
 }
-

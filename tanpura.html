@@ -3,89 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanpura Sound</title>
+    <title>ABC Music Tuner - Tanpura</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="tanpura.css">
 </head>
 <body>
+ 
     <div class="container">
-        <h1>ABC Music Tuner - Tanpura Mode</h1>
-        <p>Tap a note to play its drone sound. Tap again to stop.</p>
+        <div class="head-text">
+            <h1>ABC Music Tuner - Tanpura</h1>
+            <p>Tap a note to play sound. Tap again to stop.</p>
+        </div>
         
-        <!-- Pitch Selection -->
-        <div class="button-group">
-            <button class="note" id="btnA" onclick="togglePitch('A')">A</button>
-            <button class="note" id="btnBb" onclick="togglePitch('Bb')">Bb</button>
-            <button class="note" id="btnEb" onclick="togglePitch('Eb')">Eb</button>
-            <button class="note" id="btnC" onclick="togglePitch('C')">C</button>
+        <!-- content here -->
+
+        <!-- button-group -->
+        <div class="button-group structure">
+            <button id="btnA"  class="pitch-button" data-note="A"  onclick="togglePitch('A')">A</button>
+            <button id="btnBb" class="pitch-button" data-note="Bb"  onclick="togglePitch('Bb')">Bb</button>
+            <button id="btnEb" class="pitch-button" data-note="Eb"  onclick="togglePitch('Eb')">Eb</button>
+            <button id="btnC"  class="pitch-button" data-note="C"  onclick="togglePitch('C')">C</button>
         </div>
 
-        <div class="button-group">
-            <button class="note" id="octaveDown" onclick="toggleOctave('down')">Octave Down</button>
-            <button class="note" id="octaveUp" onclick="toggleOctave('up')">Octave Up</button>
+        <!-- Octave Controls -->
+        <div class="button-group octave-group">
+            <button id="octaveDown" onclick="toggleOctave('down')">Octave Down</button>
+            <button id="octaveUp" onclick="toggleOctave('up')">Octave Up</button>
         </div>
+        <div class="volume">
 
-        <div class="sliders">
-            <!-- Master Volume -->
+             <!-- Master Volume -->
             <div class="slider-container">
                 <label>Master Volume</label>
                 <input type="range" id="sliderMaster" min="0" max="100" value="50" class="slider" oninput="updateMasterVolume(this.value)">
                 <span id="tooltipMaster" class="tooltip">50</span>
             </div>
+
+
             <!-- Individual String Volumes -->
-        
             <div class="slider-container">
-                <label>Pa</label>
+                <label>Pa Volume</label>
                 <input type="range" id="sliderPa" min="0" max="100" value="50" class="slider" oninput="updateVolume('pa', this.value)">
                 <span id="tooltipPa" class="tooltip">50</span>
             </div>
 
             <div class="slider-container">
-                <label>sa</label>
+                <label>sa Volume</label>
                 <input type="range" id="sliderSa" min="0" max="100" value="50" class="slider" oninput="updateVolume('sa', this.value)">
                 <span id="tooltipSa" class="tooltip">50</span>
             </div>
 
             <div class="slider-container">
-                <label>sa Detuned</label>
+                <label>sa Detuned Volume</label>
                 <input type="range" id="sliderSaDetuned" min="0" max="100" value="50" class="slider" oninput="updateVolume('saDetuned', this.value)">
                 <span id="tooltipSaDetuned" class="tooltip">50</span>
             </div>
 
             <div class="slider-container">
-                <label>Sa</label>
+                <label>Sa Low Volume</label>
                 <input type="range" id="sliderSaLow" min="0" max="100" value="50" class="slider" oninput="updateVolume('saLow', this.value)">
                 <span id="tooltipSaLow" class="tooltip">50</span>
             </div>
+         
         </div>
 
-        <div class="box-2">
-            <h3><button class="collapsible" onclick="toggleCollapse()"><i class="fa-solid fa-circle-info"></i> Tanpura Info (440Hz only)</button></h3>
-            <div style="visibility: visible;" id="content">
-                <p>Used in Indian classical music, Tanpura is a stringed instrument that provides a harmonic drone with resonant intervals that agitate a wide range of hormonics. In modern times, an electronic box serves this function.</p>
-                <p>Use this tool to play the main turning pitch of Bb or A, and perfect 4ths or 5ths to check your turning</p>
-                <br>
-            </div>
-        </div>
-
-        <!-- individual images/svgs -->
-        <div class="image_text-container">
-            <div class="image_text">
-                <button><a href="./index.html" target="_self"><i class="fa-solid fa-gauge fa-2x"></i>Chromatic</a></button> 
-            </div>
-            <div class="image_text">
-                <button><a href="./drone.html" target="_self"><i class="fa-solid fa-grip-lines fa-2x"></i>Drone</a></button> 
-            </div>
-            <div class="image_text">
-                <button><a href="./tanpura.html" target="_self"> <i class="fa-solid fa-layer-group fa-2x"></i>Tanpura</a></button>
-            </div>
-            <div class="image_text">
-                <button class="btn1"><a href="./info.html" target="_self"> <img class="pic" src="Triangle w color_Full color.svg" alt=""> Info</a></button> 
-            </div>
+        <!-- about tanpura -->
+        <!-- about drone -->
+        <div class="about">
+            <h3>About Tanpura (440)</h3>
+            <p>Used in Indian classical music, Tanpura is a stringed instrument that provides a harmonic drone with resonant intervals that agitate awide range of hormonics. In modern times, an electronic box serves this function.</p>
+            <p>Use this tool to play the main turning pitch of Bb or A, and perfect 4ths or 5ths to check your turning</p>
         </div>
         
+           
+        <nav class="navbar">
+                
+            <div class="image_text">
+                        
+                <button class="nav-button"><a href="./chromatic.html" target="_self"><i class="fa-solid fa-gauge fa-2x"></i>Chromatic</a></button> 
+            </div>
+                
+            <div class="image_text">
+                    
+                    <button class="nav-button"><a href="./drone.html" target="_self"><i class="fa-solid fa-grip-lines fa-2x"></i>Drone</a></button> 
+            </div>
+                
+            <div class="image_text">
+                    
+                    <button class="nav-button"><a href="./tanpura.html" target="_self"> <i class="fa-solid fa-layer-group fa-2x"></i>Tanpura</a></button>
+            </div>
+                
+            <div class="image_text">
+                    <button id="btn1" class="nav-button"><a href="./info.html" target="_self"> <img class="pic" src="Triangle w color_Full color.svg" alt=""> Info</a></button> 
+            </div>
+    </nav>
+        
     </div>
-
+    
     <script src="script22.js"></script>
 </body>
 </html>

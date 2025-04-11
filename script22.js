@@ -5,6 +5,7 @@ let masterGain;
 let baseFrequency;
 let octaveShift = 0;
 let activePitch = null;
+let activeButton = null; 
 
 const pitchMapping = { A: 440, Bb: 466.16, Eb: 311.13, C: 261.63 };
 const stringFrequencies = { pa: 293.66, sa: 261.63, saDetuned: 260, saLow: 130.81 };
@@ -51,6 +52,23 @@ function togglePitch(pitch) {
         startTanpura();
         activePitch = pitch;
     }
+
+    const buttons = document.querySelectorAll(".pitch-button");
+
+    buttons.forEach((btn) => {
+        // Remove active class from other buttons
+        if (btn.innerText !== note) {
+            btn.classList.remove("active");
+        }
+    });
+
+    // Find the clicked button and toggle the effect
+    const clickedButton = document.querySelector(`.pitch-button[data-note="${note}"]`);
+    if (clickedButton) {
+        clickedButton.classList.toggle("active");
+    }
+
+
 }
 
 // Handle octave adjustments
@@ -142,3 +160,20 @@ function setupSlider(sliderContainer) {
 }
 
 document.querySelectorAll(".slider-container").forEach(setupSlider);
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll(".nav-button a");
+    const lastClicked = localStorage.getItem("activeLink");
+  
+    links.forEach(link => {
+      if (link.getAttribute("href") === lastClicked) {
+        link.classList.add("active");
+      }
+  
+      link.addEventListener("click", () => {
+        localStorage.setItem("activeLink", link.getAttribute("href"));
+      });
+    });
+  });
