@@ -22,7 +22,7 @@ body {
   height: 390px;
   border-image-slice: 1;
   border-image-source: linear-gradient(45deg, red, blue, green, yellow);
-  animation: borderAnimation 4s linear infinite;
+  animation: borderAnimation 10s linear infinite; /*Animation speed*/
 }
 
 
@@ -57,21 +57,24 @@ body {
 
 .structure{
   position: absolute;
-  top: 90px;
-  left: 67px;
+  top: 85px;
+  left: 34px;
+  
 }
 
 .button-group button {
   margin: 5px;
   padding: 8px 15px;
   border: none;
-  background-color:  white;
+  background-color: white;
   color: #007bff;
   border: 2px solid #007bff;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
+  width: 80px;   /* Fixed width */
+  height: 40px;   /* Fixed height */
 }
 
 .button-group button.active {
@@ -80,7 +83,7 @@ body {
 }
 .pitch-button.active  {
   box-shadow: 0 0 20px rgba(0, 102, 255, 0.8); /* Stereo glow effect */
-  background: linear-gradient(45deg, #007bff, #ff00ff); /* Blue-Purple Gradient */
+  background: linear-gradient(45deg, #2196F3, #64B5F6, #BBDEFB); /* Blue-Purple Gradient */
   color: white;
   border-color: transparent;
   animation: stereoPulse 1s infinite alternate;
@@ -95,7 +98,7 @@ body {
   }
   100% {
     transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 0, 255, 0.9);
+    box-shadow: 0 0 25px #2196F3;
   }
 }
 
@@ -105,7 +108,7 @@ body {
 
   position: absolute;
   top: 130px;
-  left: 67px;
+  left: 34px;
 
 }
 
@@ -317,16 +320,7 @@ left: 195px;
     height: 790px;
     border-image-slice: 1;
     border-image-source: linear-gradient(45deg, red, blue, green, yellow);
-    animation: borderAnimation 4s linear infinite;
-}
-
-
-@keyframes borderAnimation {
-    0% { border-image-source: linear-gradient(45deg, red, blue, green, yellow); }
-    25% { border-image-source: linear-gradient(45deg, blue, green, yellow, red); }
-    50% { border-image-source: linear-gradient(45deg, green, yellow, red, blue); }
-    75% { border-image-source: linear-gradient(45deg, yellow, red, blue, green); }
-    100% { border-image-source: linear-gradient(45deg, red, blue, green, yellow); }
+    animation: borderAnimation 30s linear infinite;
 }
 
 .head-text{
@@ -352,26 +346,45 @@ left: 195px;
      margin-top: 5px;
 
 }
+
+.button-group button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  cursor: pointer;
+  /* font-weight: lighter; */
+  font-size: 12px;
+  transition: all 0.3s ease;
+  width: 80px;   /* Fixed width */
+  height: 40px;   /* Fixed height */
+}
+
 .octave-group{
 
   position: absolute;
-  top: 120px;
-  left: 16%;
+  top: 190px;
+  left: 23%;
+
 
 }
 
 .structure{
     position: absolute;
     
-    top: 20%; /* Move down the container to the middle */
-    left: 17%;
+    top: 10%; /* Move down the container to the middle */
+    left: 1%;
   }
 
 
   .volume{
     position: absolute;
-    top: 230px;
+    top: 260px;
     padding: 0;
+    
    
 
 }
@@ -413,16 +426,26 @@ left: 195px;
     animation: borderAnimation 4s linear infinite;
 }
 
-@keyframes borderAnimation {
-    0% { border-image-source: linear-gradient(45deg, red, blue, green, yellow); }
-    25% { border-image-source: linear-gradient(45deg, blue, green, yellow, red); }
-    50% { border-image-source: linear-gradient(45deg, green, yellow, red, blue); }
-    75% { border-image-source: linear-gradient(45deg, yellow, red, blue, green); }
-    100% { border-image-source: linear-gradient(45deg, red, blue, green, yellow); }
+.button-group button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  cursor: pointer;
+  /* font-weight: lighter; */
+  font-size: 13px;
+  transition: all 0.3s ease;
+  width: 80px;   /* Fixed width */
+  height: 40px;   /* Fixed height */
 }
 
+
 .head-text {
-    margin: 10px auto;
+    margin-top: 10px;
+    margin-left: 36px;
     padding: 0;
     position: absolute;
     top: -4px;
@@ -444,20 +467,21 @@ left: 195px;
 .octave-group{
 
   position: absolute;
-  top: 92px;
-  left: 35%;
+  top: 152px;
+  left: 37%;
 
 }
 
 .structure {
     position: absolute;
-    top: 18%; /* Adjusted for tablet */
-    left: 35%;
+    top: 12%; /* Adjusted for tablet */
+    left: 23%;
 }
 
 .volume{
   position: absolute;
-  left: 30%;
+  left: 52%;
+  top: 30%;
   padding: 0;
  
 

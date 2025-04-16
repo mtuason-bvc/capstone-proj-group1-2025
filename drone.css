@@ -21,7 +21,7 @@ body {
     height: 390px;
     border-image-slice: 1;
     border-image-source: linear-gradient(45deg, red, blue, green, yellow);
-    animation: borderAnimation 4s linear infinite;
+    animation: borderAnimation 10s linear infinite;
 }
 
 
@@ -131,13 +131,21 @@ input:checked + .slider:before {
     
 }
 
+/* active/clicked state */
 .note.active {
-    background: linear-gradient(45deg, #aeeeee, #ffb3e6, #ffffb3, #c3ffb3);
+    background: linear-gradient(45deg, #1565C0, #BBDEFB);
     background-size: 300% 300%;
     border-color: white;
-    animation: gradientMove 4s ease infinite;
-    box-shadow: 0px 0px 15px rgba(174, 238, 238, 0.8), 
-                0px 0px 15px rgba(255, 179, 230, 0.8);
+    animation: gradientMove 12s ease infinite;
+    box-shadow: 0px 0px 15px #1565C0, 
+                0px 0px 15px #BBDEFB;
+    color: white; /* Ensure text stays white when active */
+  }
+  
+  /* Optional: Keep text white when hovered AND active */
+  .note.active:hover {
+    color: white;
+  
 }
 
 @keyframes gradientMove {
@@ -148,7 +156,7 @@ input:checked + .slider:before {
 
 /* hover */
 .note:hover {
-    color: rgb(52, 8, 248);
+    color: white;
     background-color: #2196F3;
 }
 
